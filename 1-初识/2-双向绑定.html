@@ -12,8 +12,8 @@
         <span v-html="link"></span>
         <span>{{number/10}}</span>
         
-        <p v-if="show_">这段点击后不显示</p>
-        <button v-on:click="handleClose">点击隐藏</button>
+        <p v-if="show_">一段文本</p>
+        <button v-on:click="handleClose">点击切换上方文本</button>
     </div>
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script type="text/javascript">
@@ -68,11 +68,15 @@
                 number:100,
                 show_:true
             },
-            mounted:{
+            mounted:function(){
+                console.log(this.link);
+            },
+            methods:{
                 handleClose:function(){
-                    this.show_=false;  //this.show_   data里的数据
+                    this_=this;
+                    //console.log(this.show)
+                    this.show_=!(this_.show_);  //this.show_   data里的数据
                 }
-
             }
         })//*/
 
