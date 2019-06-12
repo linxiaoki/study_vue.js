@@ -1,4 +1,28 @@
-#### Vue 实例 与 数据绑定
+#### 1.vue.js -> cdn
+##### 传统技术栈 vs  vue.js +？
+```
+jQuery + RequireJS(SeaJS)+artTemplate(doT)+Gulp(Grunt)
+jQuery:兼容浏览器
+RequiereJS:模块化开发时解决代码依赖混乱的问题？
+artTemplate: HTML模版（数据与HTMl模版分离）
+Gulp:合并压缩代码 ？
+```
+##### vue.js  cdn：
+```
+<!--一自动识别最新稳定版本的 Vue.js -->
+<script src= "https://unpkg.com/vue/dist/vue.min.js"></script>
+<!-- 指定某个具体版本的 Vue.js -->
+<script src="https://unpkg.com/vue@2.1.6/dist/vue.min.js"></script>
+```
+
+##### 示例说明:
+```
+v-for="book in books" >{{book.name}}  循环
+
+new vue >>  data ： {books:[{name:""},{name:""},{name:""}]}
+```
+
+#### 2. Vue 实例 与 数据绑定
 ```
 input[type=text] v-model=name
 标签内 {{name}}
@@ -160,17 +184,17 @@ v-on   "@"表示
 ```
 
 #### 总结
-声明周期:  created  mounted  beforeDestroy <br>
-插值 === html 中的变量 ```{{var1}} ,
+- 声明周期:  created  mounted  beforeDestroy <br>
+- 插值 === html 中的变量 ```{{var1}} ,
 v-html="var2" , v-bind:href="url1" , v-on:click="f1"   ... ```  <br>
 过滤器  ```date|formatDate  --> filters:{formatDate:function(){}  }``` <br>
 
-表达式：简单的运算，三元运算等 <br>
+- 表达式：简单的运算，三元运算等 <br>
 
-其他 ```mounted >> setInterval```  <br>
+- 其他 ```mounted >> setInterval```  <br>
 
-指令与事件 ```v-xxx```
+- 指令与事件 ```v-xxx```
 
-语法糖
+- 语法糖
 
 
