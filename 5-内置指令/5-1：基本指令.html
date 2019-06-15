@@ -19,7 +19,11 @@
         <span v-once>用了"v-once": {{one_time_message}}</span>
         <p>-------------------------------------</p>
         <span>条件渲染指令  status=?</span>
-        <p v-if="status===1">当status为1时显示该行</p>
+        <template v-if="status===1">
+            <p>多段文本</p>
+            <p>条件渲染指令会应用 该元素及其子节点 上</p>
+            <p>如果为多个节点，使用Vue.js 内置的 <template>元素使用 </p>
+        </template>
         <p template v-else-if="status===2">当status为2时显示该行</p>
         <p v-else="status===3">否则显示该行</p>
     </div>
