@@ -4,22 +4,32 @@
     <meta charset="UTF-8">
     <title>第5章：内部指令之基本指令</title>
     <style type="text/css">
-        v-clock:{
-            display: none;
+        [v-cloak]{
+            display:none;
         }
     </style>
         
 </head>
 <body>
     <div id="app" v-cloak>
-        {{message}}
+        <span>使用 "v-cloak"，页面不会显示未加载数据的变量了。</span>
+        <p>------------------------------------</p>
+        <span>"v-once"测试：<input type="text" v-model="one_time_message"></span><br>
+        <span >没用"v-once"：{{one_time_message}}</span><br>
+        <span v-once>用了"v-once": {{one_time_message}}</span>
+        <p>-------------------------------------</p>
+        <span>条件渲染指令  status=?</span>
+        <p v-if="status===1">当status为1时显示该行</p>
+        <p template v-else-if="status===2">当status为2时显示该行</p>
+        <p v-else="status===3">否则显示该行</p>
     </div>
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script type="text/javascript">
         var app= new Vue({
             el:'#app',
             data:{
-                message:'这是一段文本'
+                one_time_message:'这是一段普普通通的文本',
+                status:2
             }
         })
     </script>

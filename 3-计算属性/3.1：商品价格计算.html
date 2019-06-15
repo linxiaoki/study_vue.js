@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Vue 实例：商品价格计算</title>
+    <style type="text/css">
+        [v-cloak]{
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
+    <div id="app" v-cloak>
         橘子个数：<input type="text" v-model="package2[2].count"><br>
         橘子个数：{{package2[2].count}}<br>
         总价：{{prices}}
