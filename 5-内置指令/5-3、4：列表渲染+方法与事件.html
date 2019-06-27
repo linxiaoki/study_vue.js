@@ -18,20 +18,23 @@
         </template>
         <p>计数器-></p>
         <span>点击次数：{{counter}}</span>
-        <button @click="counter++">+1</button>
+        <button @click="counter++">表达式实现：+1</button>
+        <button @click="handleAdd()">methods 实现：+1</button>
+        <button @click="handleAdd(10)">methods 实现：+10</button>
     </div>
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script type="text/javascript">
         var app=new Vue({
             el:'#app',
             data:{
-                books:[{
-                    name:'《Vue.js实战》',
-                    author:'name1'
-                },
+                books:[
                 {
                     name:'《JavaScript语言精粹》',
                     author:'Douglas Crockford'
+                },
+                {
+                    name:'《Vue.js实战》',
+                    author:'name1'
                 },
                 {
                     name:'《JavaScript高级程序设计》',
@@ -46,9 +49,16 @@
                     });
                 },
                 sortedBooks:function(){
-                    return this.books.sort(function(a,b){
-                        return a.name.length<b.name.length;
+                    return this.books.sort(function(book1,book2){
+                        return book2.name.length-book1.name.length;
                     });
+                }
+            },
+            methods:{
+                handleAdd:function(count){
+                    console.log(count);
+                    count=count || 1;
+                    this.counter += count;
                 }
             }
         })
