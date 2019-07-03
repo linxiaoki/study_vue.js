@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习-购物车</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div id="app" v-clock>
+        <template v-if="list.length">  
+            table>tr>th{商品}*5^(tr>td{{{list.id}}}+td{{{list.name}}}+td{{{list.price}}}+td{{{list.count}}})*3
+
+            <div>总价：￥{{totalPrice}}</div>
+        </template>
+        <div v-else>购物车为空</div>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
+</body>
+</html>
