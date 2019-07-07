@@ -6,19 +6,22 @@ var app=new Vue({
                 id:1,
                 name:'iPhone7',
                 price:6188,
-                count:27
+                count:27,
+                checked:true
             },
             {
                 id:2,
                 name:'iPad Pro',
                 price:5888,
-                count:21
+                count:21,
+                checked:true
             },
             {
                 id:3,
                 name:'MacBook Pro',
                 price:21488,
-                count:36
+                count:36,
+                checked:true
             }
         ]
     },
@@ -27,10 +30,23 @@ var app=new Vue({
             var total=0;
             var item;
             for(var i=0;i<this.list.length;i++){
-                total += (this.list[i].price*this.list[i].count);
+                item=this.list[i];
+                if(item.checked==true){
+                    console.log(i);
+                    console.log(item.checked);
+                    total += (item.price*item.count);
+                }
             }
             //带千位分隔符
-            return total.toString().replace(/\B(?=(\d{3})+$)/,',');
+            return total.toString().replace(/\B(?=(\d{3})+$)/g,',');
+        },
+        isSelectAll:function(){
+            for(var i=0;i<this.list.length;i++){
+                if(this.list[i].checked==false){
+                    return false;
+                }
+            }
+            return true;
         }
     },
     methods:{
@@ -44,6 +60,16 @@ var app=new Vue({
         },
         handleRemove:function(index){
             this.list.splice(index,1);
+        },
+        handleChoiceAll:function(){
+            for(var i=0;i<this.list.length;i++){
+                this.list[i].checked=true;
+            }
+        },
+        handleCancelChoice:function(){
+            for(var i=0;i<this.list.length;i++){
+                this.list[i].checked=false;
+            }
         }
     }
 });
