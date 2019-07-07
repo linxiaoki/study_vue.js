@@ -9,6 +9,7 @@
         <ul>
             <li v-for="book in books">{{book.name}}</li>
         </ul>
+        <input type="text" v-model="textinput" placeholder="输入...">
     </div>
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script type="text/javascript">
@@ -18,7 +19,8 @@
                 books:[
                     {name:'《vue.js 实战》'},
                     {name:'《JavaScript 语言精粹'}
-                ]
+                ],
+                textinput:""
             }
         })
     </script>

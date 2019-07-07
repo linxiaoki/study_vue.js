@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>练习-购物车</title>    
+</head>
+<body>
+    <div id="app">
+        <p>textarea</p>
+        <textarea  v-model="text" placeholder="输入..."></textarea>
+        <p>@input</p>
+        <input type="text" @input="handleInput" placeholder="输入...">
+        <span>输入的内容拼音阶段就显示：{{message}}</span>
+        <p>单选按钮(单独使用时直接用v-bind绑定)</p>
+        <input type="radio" :checked="picked_1">
+        <label>单选按钮</label>
+        <p>单选按钮(组合使用时，需要v-model配合value使用)</p>
+        <input type="radio" v-model="picked" id="html" value="html1">
+        <lable for="html1">HTML</lable>
+        <br>
+        <input type="radio" v-model="picked" id="js" value="js">
+        <lable for="js">JavaScript</lable>
+        <br>
+        <input type="radio" v-model="picked" id="css" value="css1">
+        <lable for="css">CSS</lable>
+        <br>
+        <p>选择的项是：{{picked}}</p>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                text:'',
+                message:'',
+                picked_1:true,
+                picked:'css1'
+            },
+            methods:{
+                handleInput:function(e){
+                    this.message=e.target.value;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
