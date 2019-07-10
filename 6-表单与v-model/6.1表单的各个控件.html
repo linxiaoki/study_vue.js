@@ -2,29 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>练习-购物车</title>    
+    <title>练习-购物车</title>
+    <style type="text/css"> 
+        [v-cloak]{display:none;}
+    </style>  
 </head>
 <body>
-    <div id="app">
-        <p>textarea</p>
+    <div id="app" v-cloak>
+        <p><b>textarea</b></p>
         <textarea  v-model="text" placeholder="输入..."></textarea>
-        <p>@input</p>
+        <p><b>@input</b></p>
         <input type="text" @input="handleInput" placeholder="输入...">
         <span>输入的内容拼音阶段就显示：{{message}}</span>
-        <p>单选按钮(单独使用时直接用v-bind绑定)</p>
+        <p><b>单选按钮</b></p>
+        <p>- 单独使用时直接用v-bind绑定</p>
         <input type="radio" :checked="picked_1">
         <label>单选按钮</label>
-        <p>单选按钮(组合使用时，需要v-model配合value使用)</p>
+        <p>- 组合使用时，需要v-model配合value使用</p>
         <input type="radio" v-model="picked" id="html" value="html1">
-        <lable for="html">HTML</lable>
+        <label for="html">HTML</label>
         <br>
         <input type="radio" v-model="picked" id="js" value="js">
-        <lable for="js">JavaScript</lable>
+        <label for="js">JavaScript</label>
         <br>
         <input type="radio" v-model="picked" id="css" value="css1">
-        <lable for="css">CSS</lable>
+        <label for="css">CSS</label>
         <br>
         <p>选择的项是：{{picked}}</p>
+        <p><b>复选框</b></p>
+        <p>- 单独使用</p>
+        <input type="checkbox" v-model="checked_1" id="checked">
+        <label for="checked">选择状态：{{checked_1}}</label>
+        <p>组合使用</p>
+        <input type="checkbox" value="HTML" id="html_c" v-model="checked">
+        <label for="html_c">HTML</label>
+        <br>
+        <input type="checkbox" value="JS" id="js_c" v-model="checked">
+        <label for="js_c">JavaScript</label>
+        <br>
+        <input type="checkbox" value="Css" id="css_c" v-model="checked">
+        <label for="css_c">Css</label>
+        <p>选择的项是：{{checked}}</p>
+        <p><b>选择列表：</b></p>
+        <select v-model="selected_1">
+            <option>html</option>
+            <option value="js">JavaScript</option>
+            <option>css</option>
+        </select>
+        <p>选择的项是：{{selected_1}}</p>
+        <span>value有什么用？有value优先匹配，并且返回的值的value的值，没有value返回text的值</span>
     </div>
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script type="text/javascript">
@@ -34,7 +60,10 @@
                 text:'',
                 message:'',
                 picked_1:true,
-                picked:'css1'
+                picked:'css1',
+                checked_1:false,
+                checked:['HTML','Css'],
+                selected_1:'css'
             },
             methods:{
                 handleInput:function(e){
