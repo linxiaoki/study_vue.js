@@ -43,14 +43,46 @@
         <input type="checkbox" value="Css" id="css_c" v-model="checked">
         <label for="css_c">Css</label>
         <p>选择的项是：{{checked}}</p>
+        
         <p><b>选择列表：</b></p>
+        <p>- 单选</p>
         <select v-model="selected_1">
             <option>html</option>
             <option value="js">JavaScript</option>
             <option>css</option>
         </select>
         <p>选择的项是：{{selected_1}}</p>
-        <span>value有什么用？有value优先匹配，并且返回的值的value的值，没有value返回text的值</span>
+        <p>- 多选</p>
+        <select multiple v-model="selected">
+            <option>html</option>
+            <option value="js">JavaScript</option>
+            <option>css</option>
+        </select>
+        <p>选择的项是：{{selected}} </p>
+        <p>- v-for 动态输出</p>
+        <select v-model="selected">
+            <option v-for="option in options"
+                    :value="option.value">
+                {{option.text}}
+            </option>
+        </select>
+        <P>---------------------------</P>
+        <p>6.2 绑定值</p>
+        <input type="radio" v-model="picked_bind" :value="picked_bindvalue">
+        <label>单选按钮-选中时的值</label>
+        <p>{{picked_bind}}</p>
+        <p>{{picked_bindvalue}}</p>
+        <p>复选框</p>
+        <input  
+            type="checkbox" 
+            v-model="toggle" 
+            :true-value="value1" 
+            :false-value=":value2">
+        <label>复选框-勾选与未勾选的值</label>
+        <p>{{toggle}}</p>
+        <p>{{value1}}</p>
+        <p>{{value2}}</p>
+
     </div>
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script type="text/javascript">
@@ -63,7 +95,27 @@
                 picked:'css1',
                 checked_1:false,
                 checked:['HTML','Css'],
-                selected_1:'css'
+                selected_1:'css',
+                selected:['html','js'],
+                options:[
+                    {
+                        text:'HTML',
+                        value:'html'
+                    },
+                    {
+                        text:'JavaScript',
+                        value:'js'
+                    },
+                    {
+                        text:'CSS',
+                        value:'css'
+                    }
+                ],
+                picked_bind:false,
+                picked_bindvalue:123,
+                toggle:false,
+                value1:'a',
+                value2:'b'
             },
             methods:{
                 handleInput:function(e){
