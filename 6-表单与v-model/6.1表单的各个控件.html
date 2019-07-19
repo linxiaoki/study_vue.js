@@ -72,14 +72,14 @@
         <label>单选按钮-选中时的值</label>
         <p>{{picked_bind}}</p>
         <p>{{picked_bindvalue}}</p>
-        <p>复选框</p>
+        <p><b>复选框</b></p>
         <input  
             type="checkbox" 
             v-model="toggle" 
             :true-value="value1" 
-            :false-value=":value2">
+            :false-value="value2">
         <label>复选框-勾选与未勾选的值</label>
-        <p>{{toggle}}</p>
+        <p>{{toggle}}---> 问题：v-model=true,复选框没有勾选？</p>
         <p>{{value1}}</p>
         <p>{{value2}}</p>
 
@@ -113,7 +113,7 @@
                 ],
                 picked_bind:false,
                 picked_bindvalue:123,
-                toggle:false,
+                toggle:true,
                 value1:'a',
                 value2:'b'
             },
