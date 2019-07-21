@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7-组件</title>
+</head>
+<body>
+    <div id="app">
+        <my-component>共享data</my-component>
+        <my-component>共享data</my-component>
+        <my-component>共享data</my-component>
+        <my-component_t>不共享</my-component_t>
+        <my-component_t>不共享</my-component_t>
+        <my-component_t>不共享</my-component_t>
+    </div>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        var data={
+            counter:0
+        };
+        Vue.component('my-component',{
+            template:'<button @click="counter++">{{counter}}</button>', 
+            data:function(){
+                return data;
+            }
+        });
+        Vue.component('my-component_t',{
+            template:'<button @click="counter_t++">{{counter_t}}</button>',
+            data:function(){
+                return {
+                    counter_t:0
+                };
+            }
+        });
+        var app=new Vue({
+            el:'#app'
+        });
+    </script>
+</body>
+</html>

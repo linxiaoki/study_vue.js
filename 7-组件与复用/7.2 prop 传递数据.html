@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prop传递数据</title>
+</head>
+<body>
+    <div id="app">
+        <my-component warning-text="提示信息"></my-component>
+        <input type="text" v-model="parentMessage">
+        <my-component_t :message-te="parentMessage"></my-component_t>
+        <p>-------------------------</p>
+        <p>传数组是否bind</p>
+        <my-component_k message="[1,2,3]"></my-component_k>
+        <my-component_k :message="[1,2,3]"></my-component_k>
+    </div>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        Vue.component('my-component',{
+            props:['warningText'],
+            template:'<div>{{warningText}}</div>'
+        });
+        Vue.component('my-component_t',{
+            props:['messageTe'],
+            template:'<div>{{messageTe}}</div>'
+        });
+        Vue.component('my-component_k',{
+            props:['message'],
+            template:'<div>{{message.length}}</div>'
+        });
+        var app = new Vue({
+            el:'#app',
+            data:{
+                parentMessage:''
+            }
+        });
+    </script>
+</body>
+</html>

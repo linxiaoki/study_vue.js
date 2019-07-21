@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7.2.2 单向数据流</title>
+</head>
+<body>
+    <div id="app">
+        <p>prop 作为初始值</p>
+        <my-component :init-count="1"></my-component>
+        <p>prop 作为转变的原始值</p>
+        <my-component-t :width="100"></my-component-t>
+        <div style="width:500px">非组件内容</div>
+    </div>
+
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript" >
+        Vue.component('my-component',{
+            props:['initCount'],
+            template:'<div>{{count+1}}</div>',
+            data:function(){
+                return {
+                    count:this.initCount
+                }
+            }
+        });
+        Vue.component('my-component-t',{
+            props:['width'],
+            template:'<div :style="style">组件内容</div>',
+            computed:{
+                style:function(){
+                    return {
+                        width:this.width+'px'
+                    }
+                }
+            }
+        });
+        var app = new Vue({
+            el:'#app'
+        });
+    </script>
+</body>
+</html>
