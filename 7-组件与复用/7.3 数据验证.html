@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7.3 数据验证</title>
+</head>
+<body>
+    <div id="app">
+        <p><b>使用 v-on ，自定义事件用于组件之间</b></p>
+        <p>总数：{{total}}</p>
+        <my-component-1 @increase="handleGetTotal" @reduce="handleGetTotal"></my-component-1>
+        <p>使用v-model:</p>
+        <p><b>又是总数total:{{total_v}}</b></p>
+        <span>@input="handleGetTotal"   </span>
+        <my-component-2 @input="handleGetTotal_v"></my-component-2><br>
+        <p>
+            <span>和 v-model="total"  效果一致</span>
+            <my-component-2 v-model="total_v"></my-component-2>    
+        </p>
+        <p><b>v-model:创建</b></p>
+        <p>总数：{{total_m}}</p>
+        <my-component-3 v-model="total_m" ></my-component-3>
+        <button @click="handleReduce">-1</button>
+    </div>
+
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+    //组件通信：自定义事件
+        Vue.component('my-component-1',{
+            template:'\
+                <div>\
+                    <button @click="handleIncrease">+1</button>\
+                    <button @click="handleReduce">-1</button>\
+                    <p>counter:  {{counter}}</p>\
+                </div>',
+            data:function(){
+                return {
+                    counter:0
+                }
+            },
+            methods:{
+                handleIncrease:function(){
+                    this.counter++;
+                    this.$emit('increase',this.counter);
+                    console.log(this.counter);
+                },
+                handleReduce:function(){
+                    this.counter--;
+                    this.$emit('reduce',this.counter);
+                }
+            },
+        });
+
+    //组件通信：使用v-model,相当于语法糖
+        Vue.component('my-component-2',{
+            template:'<button @click="handleIncrease">+1</button>',
+            data:function(){
+                return {
+                    counter:0
+                }
+            },
+            methods:{
+                handleIncrease:function(){
+                    this.counter--;
+                    this.$emit('input',this.counter);
+                }
+            }
+        });
+    //组件通信：使用v-model，数据双向绑定
+        Vue.component('my-component-3',{
+            props:['value'],
+            template:'<input :value="value" @input1="updateValue">',
+            methods:{
+                updateValue:function(event){
+                    this.value++;
+                    console.log(this.value);
+                    console.log(event.target.value);
+                    this.$emit('input1',event.target.value);
+                }
+            },
+            mounted:function(){
+                this.value++;
+                console.log(this.value);
+            }
+        });
+
+    //app
+        var app = new Vue({
+            el:'#app',
+            data:{
+                total:0,
+                total_v:0,
+                total_m:0
+            },
+            methods:{
+                handleGetTotal:function(total){
+                    this.total=total;
+                },
+                handleGetTotal_v:function(total_v){
+                    this.total_v=total_v;
+                },
+                handleReduce:function(){
+                    this.total_m--;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
