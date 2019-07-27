@@ -7,31 +7,87 @@
 <body>
     <div id="app">
         <my-component warning-text="提示信息"></my-component>
+
+        <p>-----------------------------</p>
+        <p><b>父组件改变数据时传递给子组件(只能单向同步)：</b></p>
         <input type="text" v-model="parentMessage">
         <my-component_t :message-te="parentMessage"></my-component_t>
+
+        <p>--------------------------</p>
+        <p><b>父组件传递初值后，子组件自己维护(自己改变)：</b></p>
+        <input type="text" v-model="initMessage">
+        <span>{{initMessage}}</span>
+        <my-component_b :message="initMessage"></my-component_b>
+
+        <p><b>结论：</b>如果子组件绑定prop数据，父组件二次改变时prop会再次更改，所以子组件需要把 prop 赋值给 data ，如果需要改变传入的原始值，需要prop+comouted结合</p>
         <p>-------------------------</p>
+        
+        <p>作为转变的原始值</p>
+
+
         <p>传数组是否bind</p>
-        <my-component_k message="[1,2,3]"></my-component_k>
-        <my-component_k :message="[1,2,3]"></my-component_k>
+        <span>{{bind_data}}</span>
+        <my-component_k :message=bind_data></my-component_k>
+        <my-component_k message=bind_data></my-component_k>
+        <my-component_k message=[1,2,3]></my-component_k>
     </div>
     <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script type="text/javascript">
+        //父组件给子组件传入固定值 "提示信息"
         Vue.component('my-component',{
             props:['warningText'],
             template:'<div>{{warningText}}</div>'
         });
+
+        //子组件接受父组件的数据，自己不更改  输入框--> 显示
         Vue.component('my-component_t',{
             props:['messageTe'],
             template:'<div>{{messageTe}}</div>'
         });
+
+        //子组件接受父组件给的初始值,之后自己维护
+        //(那么更改子组件的值，父组件是否会更新？)当prop是对象或数组时，在子组件内改变会影响父组件(因为是引用类型)(未测试)
+        Vue.component('my-component_b',{
+            props:['message'],
+            template:'\
+                <div>\
+                    <span>子组件绑定data里的变量：</span>\
+                    <input type="text" v-model="data_message">\
+                    <span>{{data_message}}</span>\
+                    <br>\
+                    <span>子组件绑定prop里的变量：</span>\
+                    <input type="text" v-model="message">\
+                    <span>{{message}}</span>\
+                    <br>\
+                    <span>子组件绑定comouted(prop改变后)的变量：</span>\
+                    <input type="text" :value="com_message">\
+                    <span>{{com_message}}</span>\
+                </div>',
+            //有data 和 没 data
+            data:function(){
+                return {
+                    data_message:this.message
+                }
+            },
+            computed:{
+                com_message:function(){
+                    return this.message+".............."
+                }
+            }
+        });
+
+        //
         Vue.component('my-component_k',{
             props:['message'],
             template:'<div>{{message.length}}</div>'
         });
+
         var app = new Vue({
             el:'#app',
             data:{
-                parentMessage:''
+                parentMessage:'',
+                initMessage:"父组件传初始值",
+                bind_data:[1,2,3]
             }
         });
     </script>
