@@ -21,14 +21,8 @@
         <button @click="handleChangeView('B')">切换到B</button>
         <button @click="handleChangeView('C')">切换到C</button>
     </div>
-       
-    <div id="app3">
-         <component :is="currentView"></component>
-        <button @click="handleChangeView('A')">切换到A</button>
-        <button @click="handleChangeView('B')">切换到B</button>
-        <button @click="handleChangeView('C')">切换到C</button>
-    </div>
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script type="text/javascript">
         //内联模板
         Vue.component('child-component',{
@@ -61,7 +55,7 @@
                 }
             },
             data:{
-                currentView:comelse
+                currentView:'comA'
             },
             methods:{
                 handleChangeView:function(component_){
@@ -70,27 +64,6 @@
             }
         });
 
-        //动态组件2:直接绑定在组件对象上
-        var comA={
-            template:'<div>组件A</div>'
-        };
-        var comB={
-            template:'<div>组件B</div>'
-        };
-        var comC={
-            template:'<div>组件C</div>'
-        }
-        var app3=new Vue({
-            el:'#app2',
-            data:{
-                currentView:comelse
-            },
-            methods:{
-                handleChangeView:function(component_){
-                    this.currentView='com'+component_;
-                }
-            }
-        });
     </script>
 </body>
 </html>
