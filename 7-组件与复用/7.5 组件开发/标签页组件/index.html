@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>标签页组件</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+    <div id="app">
+        <tabs v-model="activeKey">
+            <pane label="标题1" name="1">
+                标签1的内容=balabala
+            </pane>
+            <pane label="标题2" name="2">
+                标签2的内容=《《《《《《《《《《《《《
+            </pane>
+            <pane label="标题3" name="3">
+                标签3的内容======》》》》》》》》》balabala
+            </pane>
+        </tabs>
+    </div>
+    
+     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="./pane.js"></script>
+    <script src="./tabs.js"></script>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                activeKey:""
+            },
+            watch:{
+                activeKey:function(){
+                    console.log("activeKey:"+this.activeKey);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

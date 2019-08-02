@@ -8,12 +8,13 @@
 <body>
     <div id="app">
         <p>父组件：{{initValue}}</p>
-        <input-number v-model="initValue"></input-number>
+        <input-number v-model="initValue" :max="100" :min="-9" :step="10"></input-number>
     </div>
 
     <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.js"></script>
     <script type="text/javascript" src="./input-number.js"></script>
-    <script type="text/javascript" src="./index.js"></script>    
+    <script type="text/javascript" src="./index.js"></script>
+
 </body>
 </html>
 

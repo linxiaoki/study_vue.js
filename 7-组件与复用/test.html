@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+    <p>总数：{{total}}</p>
+    <my-component v-model="total"></my-component>
+    <button @click="handleReduce">-1</button>
+    
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        Vue.component('my-component',{
+            template:'<input type="text" :value="" @input="updateValue" /> '
+            props:['value'],
+            methods:{
+                updateValue:function(event){
+                    this.$emit('input',event.target.value);
+                }
+            }
+        });
+        var app = new Vue(){
+            el:'#app',
+            data:{total:0   },
+            methods:{
+                
+            }
+        }
+    </script>
+
+</body>
+</html>
