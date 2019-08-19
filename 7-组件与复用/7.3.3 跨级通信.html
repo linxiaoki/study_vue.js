@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>7.3.3 跨级通信</title>
+</head>
+<body>
+    <div id="app1">
+        <p><b>使用空Vue实例作为中介</b></p>
+        <span>message: {{message}}</span>
+        <component-a></component-a>
+    </div>
+    <div id="app2">
+        <p><b>使用父链</b></p>
+        <span>message: {{message}}</span>
+        <component-b></component-b>
+    </div>
+    
+    <div id="app3">
+        <p><b>使用子组件索引</b></p>
+        <span>message: {{message}}</span>
+        <button @click="handleRef">通过ref获取子组件实例</button>
+        <component-c ref="comA"></component-c>
+    </div>
+
+    <div id="app4">
+        <p ref="p">内容</p>    
+        <component-c ref="child"></component-c>
+    </div>
+
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        //使用 中央时间总线bus作为中介 
+        var bus=new Vue({
+            data:{
+                msg:'bus message'
+            }
+        });
+        Vue.component('component-a',{
+            template:'<button @click="handleEvent">传递事件</button>',
+            methods:{
+                handleEvent:function(){
+                    bus.$emit('on-message','使用空Vue实例作为中介传递的消息');
+                }
+            }
+        });
+
+        var app =new Vue({
+            el:'#app1',
+            data:{
+                message:'app message'
+            },
+            mounted:function(){
+                var _this=this;
+                //在实例初始化时，监听来自bus实例
+                bus.$on('on-message',function(msg){
+                    console.log(this.msg);
+                    console.log(_this.message);
+                    _this.message=msg;
+                });
+            }
+        });
+
+
+        //使用父链
+        Vue.component('component-b',{
+            template:'<button @click="handleEvent">使用父链访问</button>',
+            methods:{
+                handleEvent:function(){
+                    this.$parent.message="直接访问并更改父链的message"
+                }
+            }
+        });
+
+        var app2=new Vue({
+            el:'#app2',
+            data:{
+                message:''
+            }
+        });
+
+
+        //使用子组件索引
+        Vue.component('component-c',{
+            template:'<div>子组件</div>',
+            data:function(){
+                return {
+                    message:'子组件内容'
+                }
+            }
+        });
+
+        var app3=new Vue({
+            el:'#app3',
+            data:{
+                message:''
+            },
+            methods:{
+                handleRef:function(){
+                    this.message=this.$refs.comA.message;
+                }
+            }
+        });
+
+        var app4 = new Vue({
+            el:'#app4',
+            mounted:function(){
+                console.log("打印");
+                console.log(this.$refs.p.innerHTML);
+                console.log(this.$refs.child);
+            }
+        })
+    </script>
+</body>
+</html>

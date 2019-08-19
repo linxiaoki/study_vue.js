@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7.4 使用slot</title>
+</head>
+<body>
+    <div id="app1">
+        <child-component v-show="showChild">
+            <p>在标题前面写的</p>
+            <h3 slot="header">标题</h3>
+            <p>更多分发的内容</p>  
+            <div slot="footer">底部信息</div>
+            <p>在底部信息之后写的</p>
+        </child-component><br>
+        >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        <component-a>
+            <template scope="props">
+                <p>来自父组件的内容</p>
+                <p>{{props.msg}}</p>
+            </template>
+        </component-a>
+        <br>
+        <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        <my-list :books="books">
+            <template slot="book" scope="props">
+                <li>{{props.bookName}}</li>
+            </template>
+        </my-list>
+    </div>
+
+
+    <script type="text/javascript" src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        Vue.component('child-component',{
+            template:`
+                <div class="container">
+                    <div class="header">
+                        <slot name="header">备用内容</slot>
+                    </div>
+                    <div class="main">
+                        <slot></slot>
+                        <div class="footer">
+                            <slot name="footer"></slot>
+                        </div>
+                    </div>
+                </div> 
+            `
+        });
+
+
+        //作用域插槽
+        Vue.component('component-a',{
+            template:`
+                <div class="conatainer">
+                    <slot msg="来自子组件的内容"></slot>
+                </div>
+            `
+        });
+
+        Vue.component('my-list',{
+            props:{
+                books:{
+                    type:Array,
+                    default:function(){
+                        return [];
+                    }
+                },
+            },
+            template:`
+            <ul>
+                <slot name="book" v-for="book in books" :book-name="book.name"></slot>
+            </ul>
+            `
+        });
+
+        var app1 = new Vue({
+            el:'#app1',
+            data:{
+                books:[
+                    {name:'Vue.js实战'},
+                    {name:'JavaScript语言精粹'},
+                    {name:'JavaScript高级程序设计'}
+                ],
+                showChild:true
+            }
+        });
+
+    </script>
+</body>
+</html>

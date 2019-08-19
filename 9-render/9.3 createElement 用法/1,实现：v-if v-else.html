@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现 v-if 功能</title>
+</head>
+<body>
+    <div id="app">
+        <ele :show="show"></ele>
+        <button @click="show=!show">切换 show</button>
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        Vue.component('ele',{
+            props:{
+                show:{
+                    type:Boolean,
+                    default:false
+                }
+            },
+            render:function(createElement){
+                if(this.show){
+                    return createElement('p','show 的值是true')
+                }else{
+                    return createElement('p','show 的值是false')
+                }
+            }
+        })
+        var app = new Vue({
+            el:'#app',
+            data:{
+                show:false
+            }
+        })
+    </script>
+</body>
+</html>

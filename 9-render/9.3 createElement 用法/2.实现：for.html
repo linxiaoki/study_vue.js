@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现 v-for 功能</title>
+</head>
+<body>
+    <div id="app">
+        <ele :list="list"></ele>
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        Vue.component('ele',{
+            props:{
+                list:{
+                    type:Array
+                }
+            },
+            render:function(createElement){
+                var nodes=[];
+                for(var i=0;i<this.list.length;i++){
+                    nodes.push(createElement('p',this.list[i]));
+                }
+                return createElement('div',nodes);
+            }
+        })
+        var app = new Vue({
+            el:'#app',
+            data:{
+                list:[
+                    'Vue.js----',
+                    'JavaScript....',
+                    'html-----'
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

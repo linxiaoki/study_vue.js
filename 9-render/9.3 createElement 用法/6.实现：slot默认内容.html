@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this.$slot 默认内容</title>
+</head>
+<body>
+    <div id="app">
+        <ele></ele>
+        <ele>
+            <p>slot的内容，非默认</p>
+        </ele>
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        //v-model 的 Render 函数实现
+        // v-model 就是 prop: vlaue 和 event: input 组合使用的一个语法糖
+        Vue.component('ele',{
+            render:function(createElement){
+                if(this.$slots.default===undefined){
+                    return createElement('div','没有使用 slot 时显示的文本');
+                }else{
+                    return createElement('div',this.$slots.default);
+                }
+            }
+        });
+
+        var app = new Vue({
+            el:'#app'  
+        })
+    </script>
+</body>
+</html>

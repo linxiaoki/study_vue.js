@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Render 实现锚点标签</title>
+</head>
+<body>
+    <div id="app">
+        <anchor :level="2" title="top">特性</anchor>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <anchor :level="6" title="bottom">特性2······</anchor>
+    </div>
+    
+
+    </script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        Vue.component('anchor',{
+            props:{
+                level:{
+                    type:Number,
+                    required:true
+                },
+                title:{
+                    type:String,
+                    default:''
+                }
+            },
+            render:function(createElement){
+                return createElement(
+                    'h'+this.level,
+                    {
+                        attrs:{
+                            id:this.title
+                        }
+                    },
+                    [
+                        createElement(
+                            'a',
+                            {
+                                domProps:{
+                                    href:'#' +this.title
+                                }
+                            },
+                            this.$slots.default
+                        )    
+                    ]
+                )
+            }
+        });
+        var app = new Vue({
+            el:'#app'
+        })
+    </script>
+</body>
+</html>
+
+
+

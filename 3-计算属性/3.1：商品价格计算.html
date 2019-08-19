@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 实例：商品价格计算</title>
+    <style type="text/css">
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        橘子个数：<input type="text" v-model="package2[2].count"><br>
+        橘子个数：{{package2[2].count}}<br>
+        总价：{{prices}}
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:'#app',
+            data:{
+                package1:[
+                    {
+                        name:'iPone 7',
+                        price:71,
+                        count:2
+                    },
+                    {
+                        name:'iPad',
+                        price:28,
+                        count:1
+                    }
+                ],
+                package2:[
+                    {
+                        name:'apple',
+                        price:2,
+                        count:11
+                    },
+                    {
+                        name:'banana',
+                        price:3,
+                        count:7
+                    },
+                    {
+                        name:'orange',
+                        price:5,
+                        count:3
+                    }
+                ]
+            },
+            computed:{
+                prices:function(){
+                    var prices=0;
+                    for(var i=0;i<this.package1.length;i++){
+                        prices+=this.package1[i].price*this.package1[i].count;
+                    }
+                    for(var i=0;i<this.package2.length;i++){
+                        prices+=this.package2[i].price*this.package2[i].count;
+                    }
+                    return prices;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

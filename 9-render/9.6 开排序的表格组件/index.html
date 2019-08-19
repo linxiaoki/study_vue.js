@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>可排序的表格组件</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+    <div id="app" v-cloak>
+        <span>ssr 订阅排序，筛选， 转发 </span>
+        <v-table :data="data" :columns="columns" :width="150"></v-table>
+        <button @click="handleAddData">添加数据</button>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="table.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el:'#app',
+            data:{
+                columns:[
+                    {
+                        title:'姓名',
+                        key:'name'
+                    },
+                    {
+                        title:'年龄 ',
+                        key:'age',
+                        sortable:true
+                    },
+                    {
+                        title:'出生日期 ',
+                        key:'birthday',
+                        sortable:true
+                    },
+                    {
+                        title:'地址',
+                        key:'address'
+                    }
+                ],
+                data:[
+                    {
+                        name:'王小明',
+                        age:18,
+                        birthday:'1999-02-21',
+                        address:'北京朝阳区'
+                    },
+                    {
+                        name:'张小刚',
+                        age:25,
+                        birthday:'1992-01-23',
+                        address:'上海市浦东新区'
+                    },{
+                        name:'周小伟',
+                        age:26,
+                        birthday:'1991-10-10',
+                        address:''
+                    }
+
+                ]
+            },
+            methods:{
+                handleAddData(){
+                    this.data.push({
+                        name:'刘小天',
+                        age:19,
+                        birthday:'1998-05-20',
+                        address:'北京市东城区东直门'
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

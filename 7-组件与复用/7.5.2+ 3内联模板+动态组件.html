@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>7.5.2 内联模板</title>
+</head>
+<body>
+    <div id="app1">
+        <child-component inline-template>
+            <div>
+                <h2>在父组件中定义子组件的模板</h2>
+                <p>{{message}}</p>
+                <p>{{msg}}</p>
+            </div>
+        </child-component>
+    </div>
+
+    <div id="app2">
+        <component :is="currentView"></component>
+        <button @click="handleChangeView('A')">切换到A</button>
+        <button @click="handleChangeView('B')">切换到B</button>
+        <button @click="handleChangeView('C')">切换到C</button>
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        //内联模板
+        Vue.component('child-component',{
+            data:function(){
+                return{
+                    msg:'在子组件声明的数据'
+                }
+            }
+        });
+
+        var app1 = new Vue({
+            el:'#app1',
+            data:{
+                message:'在父组件声明的数据'
+            }
+        });
+
+        //动态组件
+        var app2 = new Vue({
+            el:'#app2',
+            components:{
+                comA:{
+                    template:'<div>组件A</div>'
+                },
+                comB:{
+                    template:'<div>组件B</div>'
+                },
+                comC:{
+                    template:'<div>组件C</div>'
+                }
+            },
+            data:{
+                currentView:'comA'
+            },
+            methods:{
+                handleChangeView:function(component_){
+                    this.currentView='com'+component_;
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>

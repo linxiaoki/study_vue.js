@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第5章：内部指令之基本指令</title>
+    <style type="text/css">
+        [v-cloak]{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <span>使用 "v-cloak"，页面不会显示未加载数据的变量了。</span>
+        <p>------------------------------------</p>
+        <span>"v-once"测试：<input type="text" v-model="one_time_message"></span><br>
+        <span >没用"v-once"：{{one_time_message}}</span><br>
+        <span v-once>用了"v-once": {{one_time_message}}</span>
+        <p>-------------------------------------</p>
+        <span><b>条件渲染指令  status=?</b></span>
+        <template v-if="status===1">
+            <p>多段文本</p>
+            <p>条件渲染指令会应用 该元素及其子节点 上</p>
+            <p>如果为多个节点，使用Vue.js 内置的元素使用 </p>
+        </template>
+        <p template v-else-if="status===2">当status为2时显示该行</p>
+        <p v-else="status===3">否则显示该行</p>
+        ----------------
+        <p>渲染时，尽可能的复用已有的元素而非重新渲染，下面的 输入框 就是这样，使用key 决定是否复用元素</p>
+        <template v-if="type==='name'">
+            <lable>用户名: </lable>
+            <input type="text" placeholder="输入用户名">
+        </template>
+        <template v-else>
+            <label>邮箱: </label>
+            <input type="text" placeholder="输入邮箱">
+        </template><br>
+        <template v-if="type==='name'">
+            <label>用户名: </label>
+            <input key="name-input" type="text" placeholder="输入用户名(带key输入框)">
+        </template>
+        <template v-else>
+            <lable>邮箱: </lable>
+            <input key="mail-input" type="text" placeholder="输入邮箱(带key)">
+        </template>
+        <button @click="handleToggleClick">切换输入类型</button>
+        ------------------------
+        <p>v-for</p>
+        ------------------------
+        
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        var app= new Vue({
+            el:'#app',
+            data:{
+                one_time_message:'这是一段普普通通的文本',
+                status:1,
+                type:'name'
+            },
+            methods:{
+                handleToggleClick:function(){
+                    console.log(this.type);
+                    this.type= this.type==='name' ? 'mail' : 'name';
+                    console.log(this.type);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>异步组件-定义一个工厂函数</title>
+</head>
+<body>
+    <div id="app1">
+        <child-component></child-component>
+    </div>
+    <p>-------------------------</p>
+    <div id="app2">
+        <div id="div" v-if="showDiv">这是一段文本</div>    
+        <button @click="getText">获取div内容</button>
+
+        <p>--------------------</p>
+        <my-component></my-component>
+        <script type="text/x-template" id="my-component-1">
+            <div>这是组件内容 ----- x-template</div>
+        </script>
+    </div>
+    <div id="mount-div">
+        
+    </div>
+    
+    <script src="https:unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        Vue.component('child-component',function(resolve,reject){
+            window.setTimeout(function(){
+                resolve({
+                    template:'<div>我是异步渲染的</div>'
+                });
+            },2000);
+        });
+
+        var app1 = new Vue({
+            el:'#app1'
+        });
+
+
+        Vue.component('my-component',{
+            template:'#my-component-1'
+        });
+
+
+        var app2 = new Vue({
+            el:'#app2',
+            data:{
+                showDiv:false
+            },
+            methods:{
+                getText:function(){
+                    _this=this;
+                    this.showDiv=!(_this.showDiv);
+                    this.$nextTick(function(){
+                        console.log(this.showDiv);
+                        var text=document.getElementById('div').innerHTML;
+                        console.log(text);
+                    });
+                }
+            }
+        });
+
+        //为挂载状态
+        var MyComponent = Vue.extend({
+            template:'<div>Hello: {{name}}</div> ',
+            data:function(){
+                return {
+                    name:'Aresn'
+                }
+            }
+        });
+
+        //挂载：关联DOM元素
+        new MyComponent().$mount('#mount-div');
+        
+    </script>
+</body>
+</html> 

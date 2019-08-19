@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.3 过滤与排序</title>
+</head>
+<body>
+    <div id="app">
+        <p>过滤--></p>
+        <template v-for="book in filterBooks">
+            <li>书名：{{book.name}}</li>
+            <li>作者：{{book.author}}</li>
+        </template>
+        <p>排序-></p>
+        <template v-for="book in sortedBooks">
+            <li>书名：{{book.name}}</li>
+            <li>作者：{{book.author}}</li>
+        </template>
+        <p>计数器-></p>
+        <span>点击次数：{{counter}}</span>
+        <button @click="counter++">表达式实现：+1</button>
+        <button @click="handleAdd()">methods 实现：+1</button>
+        <button @click="handleAdd(10)">methods 实现：+10</button>
+        <p>
+            <a href="https://cn.bing.com/" @click="handleClick('禁止打开',$event)">
+            打开链接</a>
+        </p>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        var app=new Vue({
+            el:'#app',
+            data:{
+                books:[
+                {
+                    name:'《JavaScript语言精粹》',
+                    author:'Douglas Crockford'
+                },
+                {
+                    name:'《Vue.js实战》',
+                    author:'name1'
+                },
+                {
+                    name:'《JavaScript高级程序设计》',
+                    author:'Nicholas C.zakas'
+                }],
+                counter:0
+            },
+            computed:{
+                filterBooks:function(){
+                    return this.books.filter(function(book){
+                        return book.name.match(/JavaScript/);
+                    });
+                },
+                sortedBooks:function(){
+                    return this.books.sort(function(book1,book2){
+                        return book2.name.length-book1.name.length;
+                    });
+                }
+            },
+            methods:{
+                handleAdd:function(count){
+                    console.log(count);
+                    count=count || 1;
+                    this.counter += count;
+                },
+                handleClick:function(message,event){
+                    event.preventDefault(); //禁止打开链接
+                    window.alert(message);
+                }
+            }
+        })
+    </script>
+</body>
+</html>
