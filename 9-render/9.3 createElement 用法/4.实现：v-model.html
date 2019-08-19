@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实现 v-model 功能</title>
+</head>
+<body>
+    <div id="app">
+        <ele></ele>
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        //v-model 的 Render 函数实现
+        // v-model 就是 prop: vlaue 和 event: input 组合使用的一个语法糖
+        Vue.component('ele',{
+            render:function(createElement){
+                var _this=this;
+                return createElement('div',[
+                        createElement('input',{
+                            domProps:{
+                                value:this.value
+                            },
+                            on:{
+                                input:function(event){
+                                    _this.value=event.target.value;
+                                }
+                            }
+                        }),
+                        createElement('p','value:'+this.value)
+                    ])
+            },
+            data:function(){
+                return {
+                    value:''
+                }
+            }
+        }),
+
+        //template 和上一个同样效果
+        Vue.component('ele-t',{
+            template:`
+                <div>
+                    <input v-model="value" />
+                    <p>value:{{value}}</p>
+                </div>
+            `,
+            data:{
+                value:''
+            }
+        }),
+
+        var app = new Vue({
+            el:'#app'
+            
+        })
+    </script>
+</body>
+</html>

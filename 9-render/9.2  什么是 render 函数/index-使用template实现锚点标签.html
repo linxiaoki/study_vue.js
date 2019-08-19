@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>template 实现锚点标签</title>
+</head>
+<body>
+    <div id="app">
+        <anchor :level="2" title="top">特性</anchor>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <p>1</p>
+        <anchor :level="6" title="bottom">特性2······</anchor>
+    </div>
+    
+    <script type="text/x-tmplate" id="anchor">
+        <div>
+            <h1 :id="title" v-if="level===1"><a :href="'#'+title">
+                    <slot></slot>
+                </a></h1>
+            <h2 :id="title" v-if="level===2"><a :href="'#'+title">
+                    <slot></slot>
+                </a></h2>
+            <h3 :id="title" v-if="level===3"><a :href="'#'+title">
+                    <slot></slot>
+                </a></h3>
+            <h4 :id="title" v-if="level===4"><a :href="'#'+title">
+                    <slot></slot>
+                </a></h4>
+            <h5 :id="title" v-if="level===5"><a :href="'#'+title">
+                    <slot></slot>
+                </a></h5>
+            <h6 :id="title" v-if="level===6"><a :href="'#'+title">
+                    <slot></slot>
+                </a></h6>
+        </div>
+    </script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        Vue.component('anchor',{
+            template:'#anchor',
+            props:{
+                level:{
+                    type:Number,
+                    required:true
+                },
+                title:{
+                    type:String,
+                    default:''
+                }
+            }
+        });
+        var app = new Vue({
+            el:'#app'
+        })
+    </script>
+</body>
+</html>

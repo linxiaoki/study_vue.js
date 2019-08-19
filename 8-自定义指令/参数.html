@@ -6,7 +6,7 @@
 </head>
 <body>
     <div id="app">
-        <div v-test:msg.a.b="message"></div>
+        <div v-test:msg.b="message"></div>
     </div>
     <script src="https://unpkg.com/vue/dist/vue.min.js"></script>
     <script type="text/javascript">
@@ -23,6 +23,7 @@
                     'argument:'+binding.arg+'<br>'+
                     'modifiers:'+JSON.stringify(binding.modifiers)+'<br>'+
                     'vnode-keys: '+keys.join(', <br>&emsp;&emsp;&emsp;&emsp;&emsp;');
+                console.log(binding.modifiers.a + ' '+binding.modifiers.b);
             }
         });
 

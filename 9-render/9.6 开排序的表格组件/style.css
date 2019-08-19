@@ -1,0 +1,35 @@
+[v-cloak]{
+    display:none;
+}
+table{
+    width:100%;
+    margin-bottom:24px;
+    border:1px solid #e9e9e9;
+
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+}
+table th{
+    background:#f7f7f7;
+    color:#5c6b77;
+    font-weight:600;
+    white-space: nowrap;
+}
+table td,table th{
+    padding:8px 16px;
+    border:1px solid #e9e9e9;
+    text-align: center;
+}
+table th a{
+    display: inline-block;
+    padding: 0px 5px;
+    cursor:pointer;
+}
+table th a.on{
+    background:#e9e9e9;
+    color:#3399ff;
+}
+table th a:hover{
+    color:#3399ff;
+}
