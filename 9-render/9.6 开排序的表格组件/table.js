@@ -11,6 +11,10 @@ Vue.component('vTable',{
             default:function(){
                 return [];
             }
+        },
+        col_width:{
+            type:Number,
+            default:100
         }
     },
     data:function(){
@@ -36,13 +40,12 @@ Vue.component('vTable',{
                             }
                         }
                     },'↑'),
-
                     createEle('a',{
                         class:{on:col._sortType==='desc'},
                         on:{
                             click:function(){
                                 _this.handleSortByDesc(index)
-                            }
+                            } 
                         }
                     },'↓')
                 ]));
@@ -53,12 +56,21 @@ Vue.component('vTable',{
         var trs=[];
         this.currentData.forEach(function(row){
             var tds=[];
-            _this.currentColumns.forEach(function(col){
-                tds.push(createEle('td',row[col.key]));
+            _this.currentColumns.forEach(function(cell){
+                tds.push(createEle('td',row[cell.key]));
             });
             trs.push(createEle('tr',tds));
         });
         return createEle('table',[
+            //添加 colgroup
+            createEle('colgroup',{
+                attrs:{
+                    span:this.columns.length,
+                },
+                style:{
+                    width:this.col_width+'px'
+                }
+            }),
             createEle('thead',[
                 createEle('tr',ths)
             ]),
@@ -126,4 +138,4 @@ Vue.component('vTable',{
         this.makeColumns();
         this.makeData();
     }
-})
+});

@@ -8,11 +8,16 @@
 <body>
     <div id="app" v-cloak>
         <span>ssr 订阅排序，筛选， 转发 </span>
-        <v-table :data="data" :columns="columns" :width="150"></v-table>
+        <v-table :data="data" :columns="columns" :col_width="width"></v-table>
         <button @click="handleAddData">添加数据</button>
+        <p></p>
+        <p></p>
+        <p></p>
+        <t-table :data="data" :columns="columns" :width="width"></t-table>
     </div>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="table.js"></script>
+    <script src="table-template.js"></script>
     <script type="text/javascript">
         var app = new Vue({
             el:'#app',
@@ -56,7 +61,8 @@
                         address:''
                     }
 
-                ]
+                ],
+                width:300
             },
             methods:{
                 handleAddData(){

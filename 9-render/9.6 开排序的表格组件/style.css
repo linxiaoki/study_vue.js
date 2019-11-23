@@ -23,7 +23,7 @@ table td,table th{
 }
 table th a{
     display: inline-block;
-    padding: 0px 5px;
+    margin: 0px 5px;
     cursor:pointer;
 }
 table th a.on{
