@@ -1,6 +1,7 @@
 //webpack.config.js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const path = require('path');
 
@@ -54,6 +55,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "src/index.tmpl.html")
         }),
-        new ExtractTextPlugin("main.css")
+        new ExtractTextPlugin("main.css"),
+        new VueLoaderPlugin()
     ]
 }

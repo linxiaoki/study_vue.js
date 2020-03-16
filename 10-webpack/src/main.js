@@ -1,12 +1,17 @@
 //main.js
 import Vue from "vue";
-import app from './app.vue';
-
-import './style.css';
+import app from './vue/app.vue';
 
 new Vue({
     el: "#app",
     render: h=>h(app)
 });
 
-document.getElementById("app").innerHTML="hello";
+/* render: funciton(createElement){
+    createElement(
+        {
+
+        }
+    )
+}
+*/
