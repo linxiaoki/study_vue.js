@@ -49,7 +49,7 @@ computed: {
 关于数组的更新：
     可以更新数组的方法：push(),pop(),shift(),unshift(),splice(),sort(),reverse()
     返回一个新数组的方法(所以需要替换原数组才可以更新)：filter(),concat(),slice()
-    通过索引直接设置项不会触发视图更新: `app.books[2]={...}
+    通过索引直接设置项不会触发视图更新: `app.books[2]={...}`
         1. 使用Vue内置的 set 方法
             Vue.set(app.books,2,{...});
         2. webpack 中使用组件话方式时，可以使用 $set
@@ -64,7 +64,7 @@ computed: {
     Vue 提供特殊变量$event ,用于访问原生 DOM 事件。
    
 修饰符： 在@绑定的事件后加'.',再跟一个后缀来使用修饰符。如： .prevent, .stop, .capture, .self, .once
-    ```
+ ```
     <!-- 阻止单击事件 冒泡 --> 
     <a @click.stop = "handle" ></a>
     <!-- 提交事件不再重载页面 --> 
@@ -83,7 +83,7 @@ computed: {
     <!--  监听键盘事件，只有在 keyCode 是 13 时调用 vm.submit()--> 
     <input @keyup.13 ="submit">
     <!-- Vue 还提供很多键盘的快捷方式 -->
-    ```
+ ```
 
 表单和v-model： Vue 提供 v-model 指令，用于在表单类元素（单选，多选，下拉选择，输入框）双向绑定数据。
     使用 v-model 后，表单控件显示的值只依赖所绑定的数据，不再关心初始化的value的值
@@ -101,7 +101,7 @@ computed: {
 组件的通信：
   父组件向子组件：
     props：父组件向子组件单向传递数据或参数（正向传递）。(html 不区分大小写，所以会将包含大写的 props 变量名要转为kebab-case形式.)
-    ```
+ ```
     // 传入固定的字符串
     <my-component warning-text="传入"></my-component>
     // 传入动态的数据（变量）：使用bind
@@ -109,10 +109,11 @@ computed: {
     // 传递数字、布尔值、数组、对象 (不使用 v-bind ，就是会获得字符串）
     <my-component message="[1,2,3]"></my-component>   // 字符串
     <my-component :message="[1,2,3]"></my-component>  // 数组
-    ```
-    传入子组件的数据是对象或者数组，则子组件改变这些数据也会影响父组件（对象和数组是引用类型）
+ ```
     
-    props 数据验证，设置数据的类型，示例：
+传入子组件的数据是对象或者数组，则子组件改变这些数据也会影响父组件（对象和数组是引用类型）
+    
+props 数据验证，设置数据的类型，示例：
     ```
     props: {
         propA: Number, // 后接类型，必须是数字类型
@@ -133,14 +134,15 @@ computed: {
         }
     }
     ```
-  子组件向父组件：
-    用到自定义事件。子组件用 $emit() 触发事件，父组件用 $on() 监听子组件的事件。
     
-    $parent, $children, $refs(通过特殊参数ref来设置)
+ 子组件向父组件：
+ 用到自定义事件。子组件用 $emit() 触发事件，父组件用 $on() 监听子组件的事件。
     
-    
-    单个slot , 具名slot（定义时有name） 和 作用域插槽
+ $parent, $children, $refs(通过特殊参数ref来设置)
     
     
+ 单个slot , 具名slot（定义时有name） 和 作用域插槽
     
-    看了不用全都忘光光
+    
+    
+ 看了不用全都忘光光
